@@ -43,9 +43,10 @@ for Ativo in ativos:
 	RetornoAbs = math.log(acumulado[-1] / acumulado[1])
 
 	last = str(state[-1])
-	absoluto = str(round(RetornoAbs,2))
+	absoluto = round(RetornoAbs * 100)
+	absoluto = str(absoluto)
 
-	prev.append(str(Ativo + '(' + absoluto + ')' + ': ' + last))
+	prev.append(str(Ativo + '(' + absoluto + '%' + ')' + ': ' + last))
 
 
 print(retornos.tail)
