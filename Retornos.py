@@ -3,12 +3,14 @@ import numpy as np
 import math, os
 
 ndf = pd.read_csv('NewDataFrame.csv')
-print(ndf)
+#print(ndf)
 
 ativos = ['PETR4', 'BOVA11', 'ITUB4', 'VALE3', 'BBAS3']
 
 retornos = pd.DataFrame()
 retornos['Data'] = ndf['Data']
+
+prev = []
 
 for Ativo in ativos:
 
@@ -32,9 +34,26 @@ for Ativo in ativos:
 	state = np.array(state)
 	retornos[str(Ativo + '- State')] = state
 	retornos[str(Ativo + '- Var%')] = var
+	last = str(state[-1])
+
+	prev.append(str(Ativo + ': ' + last))
 
 
-print(retornos)
+print(retornos.tail)
 
 retornos.to_csv('Retornos.csv', index = False)
 
+
+print('=============================== Previstos =============================== ')
+
+ops = 0
+for p in prev:
+	
+	if p[-1] != '0':
+		print(p)
+		ops += 1
+	else:
+		continue
+
+if ops == 0:
+	print('Nenhuma operação detectada.') 
