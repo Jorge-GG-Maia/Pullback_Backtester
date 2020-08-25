@@ -15,7 +15,9 @@ prev = []
 for Ativo in ativos:
 
 	state = []
+	acumulado = []
 	state.append(0)
+	acumulado.append(float(1000.00))
 
 	var = ndf[str(Ativo + '- Var%')]
 
@@ -30,13 +32,20 @@ for Ativo in ativos:
 		else:
 			state.append(0)
 
+	for a in range (1, len(ndf)):
+		acumulado.append(acumulado[a-1] * (1+ (state[a] * ndf[str(Ativo + '- Log')][a])))
 
 	state = np.array(state)
 	retornos[str(Ativo + '- State')] = state
 	retornos[str(Ativo + '- Var%')] = var
-	last = str(state[-1])
+	retornos[str(Ativo + '- Acumulado')] = acumulado
 
-	prev.append(str(Ativo + ': ' + last))
+	RetornoAbs = math.log(acumulado[-1] / acumulado[1])
+
+	last = str(state[-1])
+	absoluto = str(round(RetornoAbs,2))
+
+	prev.append(str(Ativo + '(' + absoluto + ')' + ': ' + last))
 
 
 print(retornos.tail)
