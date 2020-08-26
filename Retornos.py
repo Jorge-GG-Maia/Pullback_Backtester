@@ -17,8 +17,10 @@ for Ativo in ativos:
 
 	state = []
 	acumulado = []
+	benchmark = []
 	state.append(0)
 	acumulado.append(float(1000.00))
+	benchmark.append(float(1000.00))
 
 	#var = ndf[str(Ativo + '- Var%')]
 
@@ -36,18 +38,25 @@ for Ativo in ativos:
 	for a in range (1, len(ndf)):
 		acumulado.append(acumulado[a-1] * (1 + (state[a] * ndf[str(Ativo + '- Log')][a])))
 
+		benchmark.append(benchmark[a-1] * (1 + (ndf[str(Ativo + '- Log')][a])))
+
 	state = np.array(state)
 	retornos[str(Ativo + '- State')] = state
 	#retornos[str(Ativo + '- Var%')] = var
 	retornos[str(Ativo + '- Acumulado')] = acumulado
+	retornos[str(Ativo + '- Benchmark')] = benchmark
 
 	RetornoAbs = math.log(acumulado[-1] / acumulado[0])
+	BenchmarkAbs = math.log(benchmark[-1] / benchmark[0])
 
 	last = str(state[-1])
 	absoluto = round(RetornoAbs * 100)
-	absoluto = str(absoluto)
+	absoluto = str(absoluto) + '%'
+	
+	bench = round(BenchmarkAbs * 100)
+	bench = str(bench) + '%'
 
-	prev.append(str(Ativo + '(' + absoluto + '%' + ')' + ': ' + last))
+	prev.append(str(Ativo + '(' + absoluto + ' B&H: ' + bench + ')' + ': ' + last))
 
 
 print(retornos)
@@ -59,7 +68,7 @@ print('=============================== Previstos ===============================
 
 ops = 0
 for p in prev:
-	print(p)
+	print(p, '\n')
 	
 	if p[-1] == '0':
 		#print(p)
