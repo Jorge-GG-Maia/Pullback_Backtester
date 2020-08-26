@@ -3,9 +3,10 @@ import numpy as np
 import math, os
 
 ndf = pd.read_csv('NewDataFrame.csv')
+listagem = pd.read_csv('Listagem.csv')
 #print(ndf)
 
-ativos = ['PETR4', 'BOVA11', 'ITUB4', 'VALE3', 'BBAS3']
+ativos = listagem['Ativos']
 
 retornos = pd.DataFrame()
 retornos['Data'] = ndf['Data']
@@ -49,7 +50,7 @@ for Ativo in ativos:
 	prev.append(str(Ativo + '(' + absoluto + '%' + ')' + ': ' + last))
 
 
-print(retornos.tail)
+print(retornos)
 
 retornos.to_csv('Retornos.csv', index = False)
 
@@ -59,7 +60,7 @@ print('=============================== Previstos ===============================
 ops = 0
 for p in prev:
 	
-	if p[-1] != '0':
+	if p[-1] == '0':
 		print(p)
 		ops += 1
 	else:
@@ -67,3 +68,5 @@ for p in prev:
 
 if ops == 0:
 	print('Nenhuma operação detectada.') 
+
+print('========================================================================= ')
