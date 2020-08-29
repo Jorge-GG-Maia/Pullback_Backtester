@@ -5,7 +5,7 @@ média de retornos do ativo, com timeframe de D+1.
 Como utilizar:
     
     Basta inserir na pasta DataBase os dados históricos das ações desejadas, em arquivo CSV contendo data no formato "DD/MM/YYYY" e a cotação (usando ponto 
-como separação de decimais) do período correspondente (recomenda-se no mínimo 1 ano de histórico), e nomeando o arquivo com o código da ação desejada, (EX.: PETR4.csv). Este trading system funciona em qualquer timeframe (diário, semanal ou mensal). Quanto mais ações sejam adicionadas, maior a frequência de operações.
+como separação de decimais) do período correspondente (recomenda-se no mínimo 1 ano de histórico), e nomeando o arquivo com o código da ação desejada, (EX.: BOVA11.csv). Este trading system funciona em qualquer timeframe (diário, semanal ou mensal). Quanto mais ações sejam adicionadas, maior a frequência de operações.
 
     As datas e cotações correspondentes devem estar dispostas em ordem crescente. Partindo da data mais antiga até a mais recente, sendo de preferencia
 a data mais recente a do fechamento do período atual, no qual o programa projetará as ordens para o período seguinte, caso sejam detectadas. Este script

@@ -111,7 +111,7 @@ for Ativo in ativos:
 	bench = round(BenchmarkAbs * 100)
 	bench = str(bench) + '%'
 
-	prev.append(str(Ativo + '( ' 'Acumulado: ' + absoluto + ' B&H: ' + bench + ')' + ': ' + last))
+	prev.append(str(Ativo + '( ' 'Acumulado: ' + absoluto + ',' + ' B&H: ' + bench + ')' + ': ' + last))
 
 	
 print(retornos)
