@@ -2,9 +2,11 @@ import pandas as pd
 import numpy as np
 import math, os
 
+
+
 ndf = pd.read_csv('NewDataFrame.csv')
 listagem = pd.read_csv('Listagem.csv')
-#print(ndf)
+
 
 ativos = listagem['Ativos']
 
@@ -22,7 +24,7 @@ for Ativo in ativos:
 	acumulado.append(float(1000.00))
 	benchmark.append(float(1000.00))
 
-	#var = ndf[str(Ativo + '- Var%')]
+
 
 	for i in range(1, len(ndf)):
 
@@ -42,7 +44,7 @@ for Ativo in ativos:
 
 	state = np.array(state)
 	retornos[str(Ativo + '- State')] = state
-	#retornos[str(Ativo + '- Var%')] = var
+
 	retornos[str(Ativo + '- Acumulado')] = acumulado
 	retornos[str(Ativo + '- Benchmark')] = benchmark
 
@@ -58,7 +60,7 @@ for Ativo in ativos:
 
 	prev.append(str(Ativo + '(' + absoluto + ' B&H: ' + bench + ')' + ': ' + last))
 
-
+	
 print(retornos)
 
 retornos.to_csv('Retornos.csv', index = False)

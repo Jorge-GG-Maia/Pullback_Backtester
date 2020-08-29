@@ -44,7 +44,7 @@ for Ativo in ativos:
 
 
 ndf = ndf[20:len(historico)]
-print(ndf)
+#print(ndf)
 
 
 ativos = np.array(ativos)
@@ -111,7 +111,7 @@ for Ativo in ativos:
 	bench = round(BenchmarkAbs * 100)
 	bench = str(bench) + '%'
 
-	prev.append(str(Ativo + '(' + absoluto + ' B&H: ' + bench + ')' + ': ' + last))
+	prev.append(str(Ativo + '( ' 'Acumulado: ' + absoluto + ' B&H: ' + bench + ')' + ': ' + last))
 
 	
 print(retornos)
@@ -124,7 +124,7 @@ print('=============================== Previstos ===============================
 ops = 0
 for p in prev:
 	
-	if p[-1] != '0':
+	if p[-1] == '0':
 		print(p, '\n')
 		ops += 1
 	else:
