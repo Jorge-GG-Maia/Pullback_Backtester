@@ -4,7 +4,7 @@ import math, os
 
 ndf = pd.DataFrame()
 
-lista = os.listdir('/home/jorge/Documentos/Advisor_Backtest/DataBase')
+lista = os.listdir('Database Path')
 ativos = []
 
 for l in lista:
@@ -15,7 +15,7 @@ for l in lista:
 print(ativos)
 for Ativo in ativos:
 	
-	historico = pd.read_csv(str('/home/jorge/Documentos/Advisor_Backtest/DataBase/' + Ativo + '.csv'))
+	historico = pd.read_csv(str('Database Path' + Ativo + '.csv'))
 
 
 	log = []
@@ -50,9 +50,9 @@ ndf = ndf[20:len(historico)]
 ativos = np.array(ativos)
 listagem = pd.DataFrame()
 listagem['Ativos'] = ativos
-listagem.to_csv('/home/jorge/Documentos/Advisor_Backtest/Listagem.csv', index = False)
+listagem.to_csv('Listagem.csv', index = False)
 
-ndf.to_csv('/home/jorge/Documentos/Advisor_Backtest/NewDataFrame.csv', index = False)
+ndf.to_csv('NewDataFrame.csv', index = False)
 
 
 
