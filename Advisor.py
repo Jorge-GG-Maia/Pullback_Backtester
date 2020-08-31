@@ -4,7 +4,7 @@ import math, os
 
 ndf = pd.DataFrame()
 
-lista = os.listdir('Database Path')
+lista = os.listdir('/home/jorge/Documentos/Advisor_Backtest/DataBase')
 ativos = []
 
 for l in lista:
@@ -15,7 +15,7 @@ for l in lista:
 print(ativos)
 for Ativo in ativos:
 	
-	historico = pd.read_csv(str('Database Path' + Ativo + '.csv'))
+	historico = pd.read_csv(str('/home/jorge/Documentos/Advisor_Backtest/DataBase/' + Ativo + '.csv'))
 
 
 	log = []
@@ -47,21 +47,14 @@ ndf = ndf[20:len(historico)]
 #print(ndf)
 
 
-ativos = np.array(ativos)
-listagem = pd.DataFrame()
-listagem['Ativos'] = ativos
-listagem.to_csv('Listagem.csv', index = False)
 
-ndf.to_csv('NewDataFrame.csv', index = False)
+ndf.to_csv('/home/jorge/Documentos/Advisor_Backtest/DadosProcessados.csv', index = False)
 
 
 
-
-ndf = pd.read_csv('NewDataFrame.csv')
-listagem = pd.read_csv('Listagem.csv')
+ndf = pd.read_csv('DadosProcessados.csv')
 
 
-ativos = listagem['Ativos']
 
 retornos = pd.DataFrame()
 retornos['Data'] = ndf['Data']
@@ -95,8 +88,6 @@ for Ativo in ativos:
 
 		benchmark.append(benchmark[a-1] * (1 + (ndf[str(Ativo + '- Log')][a])))
 
-	state = np.array(state)
-	retornos[str(Ativo + '- State')] = state
 
 	retornos[str(Ativo + '- Acumulado')] = acumulado
 	retornos[str(Ativo + '- Benchmark')] = benchmark
