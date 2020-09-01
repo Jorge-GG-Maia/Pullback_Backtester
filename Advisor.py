@@ -2,8 +2,8 @@ import pandas as pd
 import numpy as np
 import math, os
 
-ndf = pd.DataFrame()
 
+#Acessando os dados históricos na pasta DataBase e criando a lista dos ativos // Acessing the DataBase directory and creating the stock list
 lista = os.listdir('/home/jorge/Documentos/Advisor_Backtest/DataBase')
 ativos = []
 
@@ -13,6 +13,9 @@ for l in lista:
 		ativos.append(codigo)
 
 print(ativos)
+
+#Processando os dados obtidos para cada ativo e os organizando em um novo dataframe // Processing the data of each stock and organizing them in a new dataframe
+ndf = pd.DataFrame()
 for Ativo in ativos:
 	
 	historico = pd.read_csv(str('/home/jorge/Documentos/Advisor_Backtest/DataBase/' + Ativo + '.csv'))
@@ -41,21 +44,14 @@ for Ativo in ativos:
 	ndf[str(Ativo + '- Superior')] = ndf[str(Ativo + '- MM20')] + (ndf[str(Ativo + '- Desvpad')]) * 2
 	ndf[str(Ativo + '- Inferior')] = ndf[str(Ativo + '- MM20')] - (ndf[str(Ativo + '- Desvpad')]) * 2
 
-
-
 ndf = ndf[20:len(historico)]
-#print(ndf)
 
-
-
+#Salvando os dados processados para fins de análises futuras // Saving the processed data for future analysis
 ndf.to_csv('/home/jorge/Documentos/Advisor_Backtest/DadosProcessados.csv', index = False)
-
-
-
 ndf = pd.read_csv('DadosProcessados.csv')
 
 
-
+#Criando um dataframe diferente para avaliar os ganhos históricos acumulados para cada ativo // Creating a different DataFrame to evaluate the historical gains for each stock
 retornos = pd.DataFrame()
 retornos['Data'] = ndf['Data']
 
@@ -102,14 +98,13 @@ for Ativo in ativos:
 	bench = round(BenchmarkAbs * 100)
 	bench = str(bench) + '%'
 
-	prev.append(str(Ativo + '( ' 'Acumulado: ' + absoluto + ',' + ' B&H: ' + bench + ')' + ': ' + last))
-
-	
+	prev.append(str(Ativo + '( ' 'Acumulado: ' + absoluto + ',' + ' B&H: ' + bench + ')' + ': ' + last))	
 print(retornos)
 
 retornos.to_csv('Retornos.csv', index = False)
 
-
+#Apresentando as previsões de compra e venda dentro da estratégia para o último período apresentado na base de dados // Presenting the buying and selling forecasts of the strategy for the last period on the database
+#Se nenhuma operação for detectada para o período apresentará a mensagem: "Nenhuma operação detectada" // If no operations were detected will print the messege: "No operations detected"
 print('=============================== Previstos =============================== ')
 
 ops = 0
@@ -122,6 +117,6 @@ for p in prev:
 		continue
 
 if ops == 0:
-	print('Nenhuma operação detectada.') 
+	print('Nenhuma operação detectada. // No operations detected') 
 
 print('========================================================================= ')
